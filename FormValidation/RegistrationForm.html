@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form Validation</title>
+    <script>
+        function validateForm() {
+            let id = document.getElementById("input1").value;
+            let name = document.getElementById("input2").value;
+            let email = document.getElementById("input3").value;
+            let phoneNo = document.getElementById("input4").value;
+            let address = document.getElementById("input5").value;
+            let password = document.getElementById("input6").value;
+
+            let idError = document.getElementById("idError");
+            let nameError = document.getElementById("nameError");
+            let emailError = document.getElementById("emailError");
+            let phoneNoError = document.getElementById("phoneNoError");
+            let addressError = document.getElementById("addressError");
+            let passwordError = document.getElementById("passwordError");
+
+            // Clear previous errors
+            idError.innerText = "";
+            nameError.innerText = "";
+            emailError.innerText = "";
+            phoneNoError.innerText = "";
+            addressError.innerText = "";
+            passwordError.innerText = "";
+
+            let isValid = true; // Track validation status
+
+            // Validation rules
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            let phonePattern = /^\d{10}$/;
+
+            if (id === "") {
+                idError.innerText = "* ID is required";
+                isValid = false;
+            }
+            if (name === "") {
+                nameError.innerText = "* Name is required";
+                isValid = false;
+            }
+            if (!emailPattern.test(email)) {
+                emailError.innerText = "* Enter a valid email";
+                isValid = false;
+            }
+            if (!phonePattern.test(phoneNo)) {
+                phoneNoError.innerText = "* Enter a valid 10-digit phone number";
+                isValid = false;
+            }
+            if (address === "") {
+                addressError.innerText = "* Address is required";
+                isValid = false;
+            }
+            if (password.length < 6) {
+                passwordError.innerText = "* Password must be at least 6 characters";
+                isValid = false;
+            }
+
+            return isValid; // If false, form won't submit
+        }
+    </script>
+</head>
+
+<body>
+    <h1 style="text-align: center;">User Registration Form</h1>
+
+    <form action="submit.php" method="post" onsubmit="return validateForm()">
+        <table style="margin: auto; text-align: left;">
+            <tr>
+                <td>User ID:</td>
+                <td><input type="text" id="input1" name="id"></td>
+                <td><span id="idError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" id="input2" name="name"></td>
+                <td><span id="nameError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" id="input3" name="email"></td>
+                <td><span id="emailError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Phone No:</td>
+                <td><input type="text" id="input4" name="phoneNo"></td>
+                <td><span id="phoneNoError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" id="input5" name="address"></td>
+                <td><span id="addressError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" id="input6" name="password"></td>
+                <td><span id="passwordError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><button type="submit">Submit</button> <button type="reset">Reset</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
